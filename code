@@ -1,0 +1,19 @@
+numerosEntreDosYelSiguienteValor :: Integer -> [Integer]
+numerosEntreDosYelSiguienteValor x = filter esPrimo [2..x]
+
+-- Función para verificar si un número es primo
+esPrimo :: Integer -> Bool
+esPrimo n
+  | n <= 1    = False
+  | otherwise = not $ any (\x -> n `mod` x == 0) [2..isqrt n]
+  where
+    isqrt = floor . sqrt . fromIntegral
+
+-- Ejemplo de uso
+main :: IO ()
+main = do
+  putStrLn "Ingrese un número entero mayor que 2:"
+  input <- getLine
+  let x = read input :: Integer
+  let primos = numerosEntreDosYelSiguienteValor x
+  putStrLn $ "Números primos entre 2 y " ++ show x ++ ": " ++ show primos
